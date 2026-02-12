@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sorting Hat - Question 3</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Henny+Penny&family=Cinzel+Decorative:wght@700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/harry-p" rel="stylesheet">
+</head>
+
+<body data-next-url="quiz_silence.html">
+    <div class="background-container">
+        <canvas id="sparkleCanvas"></canvas>
+    </div>
+
+    <div class="content-container quiz-container">
+        <div class="hat-wrapper">
+            <img src="assets/HatMask2.png" alt="The Sorting Hat" class="sorting-hat-image-q1">
+            <div id="wrongAnswerNotification" class="speech-bubble hidden">Ahh close!</div>
+            <div id="correctAnswerNotification" class="speech-bubble hidden" style="color: green;">That one was tricky..
+                even for me!!</div>
+        </div>
+
+        <div class="question-box">
+            <h2 class="question-text">"If we were Harry and Hermione in the tent, but instead of the radio playing “O
+                Children,” I
+                started singing "Moorninngg is heerree!!,", what would be "Hermoine response to my 'Ron' behaviour?"
+            </h2>
+        </div>
+
+        <div class="options-container">
+            <button class="magic-button option-btn" data-correct="false">A. Do a goofy dance to make it worse.</button>
+            <button class="magic-button option-btn" data-correct="true">B. Give me a look and say,"Can I hit
+                you?</button>
+            <button class="magic-button option-btn" data-correct="false">C. Immediately fall asleep like Snorlax and say
+                "Neenu Aviche..."</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
