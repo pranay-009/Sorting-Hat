@@ -1,4 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ===== Background Music with Persistence =====
+    const bgMusic = document.getElementById('bgMusic');
+    if (bgMusic) {
+        console.log('🎵 Audio element found');
+
+        // Restore playback position from localStorage
+        const savedTime = localStorage.getItem('bgMusicTime');
+        const wasPlaying = localStorage.getItem('bgMusicPlaying') === 'true';
+
+        if (savedTime) {
+            bgMusic.currentTime = parseFloat(savedTime);
+            console.log('🎵 Restored playback position:', savedTime);
+        }
+
+        bgMusic.volume = 0.5; // Set volume to 30%
+
+        // ALWAYS try to play music (regardless of previous state)
+        console.log('🎵 Attempting to play music...');
+        bgMusic.play().then(() => {
+            console.log('✅ Music playing successfully!');
+            localStorage.setItem('bgMusicPlaying', 'true');
+        }).catch(err => {
+            console.log('⚠️ Autoplay prevented. Music will start on first user interaction.');
+            console.log('Error:', err.message);
+            // Add click listener to start music on first interaction
+            const startMusic = () => {
+                console.log('🎵 User clicked, attempting to play...');
+                bgMusic.play().then(() => {
+                    console.log('✅ Music started after user interaction!');
+                    localStorage.setItem('bgMusicPlaying', 'true');
+                }).catch(e => console.log('❌ Could not play music:', e));
+            };
+            document.addEventListener('click', startMusic, { once: true });
+            document.addEventListener('keydown', startMusic, { once: true });
+        });
+
+        // Save playback position periodically
+        setInterval(() => {
+            if (!bgMusic.paused) {
+                localStorage.setItem('bgMusicTime', bgMusic.currentTime.toString());
+                localStorage.setItem('bgMusicPlaying', 'true');
+            }
+        }, 500); // Save every 500ms
+
+        // Save state before page unload
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('bgMusicTime', bgMusic.currentTime.toString());
+            localStorage.setItem('bgMusicPlaying', (!bgMusic.paused).toString());
+        });
+    } else {
+        console.log('❌ Audio element not found!');
+    }
+
+    // ===== Sparkle Canvas Animation =====
     initSparkles();
 
     const enterBtn = document.getElementById('enterBtn');
